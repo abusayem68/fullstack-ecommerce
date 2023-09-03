@@ -1,13 +1,13 @@
 import Navbar from '../components/Navbar/Navbar';
-import ProductList from '../components/ProductList/ProductList';
+import ProductDetails from '../components/ProductDetails/ProductDetails';
 
-export default function Home() {
+export default function ProductDetailsPage() {
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar />
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          <ProductList />
+          <ProductDetails />
         </div>
       </main>
     </>
