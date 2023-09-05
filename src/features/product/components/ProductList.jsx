@@ -5,6 +5,7 @@ import {
   Squares2X2Icon,
 } from '@heroicons/react/20/solid';
 import { Fragment, useEffect, useState } from 'react';
+import { PRODUCTS_PER_PAGE } from '../../../app/constant';
 import Pagination from '../../common/Pagination';
 import {
   useGetBrandsQuery,
@@ -16,6 +17,7 @@ import MobileFilter from './MobileFilter';
 import ProductGrid from './ProductGrid';
 
 const sortOptions = [
+  { name: 'Default', sort: '', order: '', current: true },
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
   {
     name: 'Price: Low to High',
@@ -36,18 +38,22 @@ function classNames(...classes) {
 }
 export default function ProductList() {
   const [fetchProducts, setFetchProducts] = useState(true);
-  const [reFecch, setRefetch] = useState(true);
   const [filter, setFilter] = useState({});
-  const [sort, setSort] = useState({});
+  const [sort, setSort] = useState({ _sort: '', _order: '' });
+  const [page, setPage] = useState(1);
   const {
-    data: products,
+    data: productsData,
     isLoading,
     isError,
-  } = useGetProductsByFiltersQuery({ filter, sort }, { skip: fetchProducts });
-  const { data: categories } = useGetCategoriesQuery({ skip: reFecch });
-  const { data: brands } = useGetBrandsQuery({ skip: reFecch });
+  } = useGetProductsByFiltersQuery(
+    { filter, sort, pagination: { _page: page, _limit: PRODUCTS_PER_PAGE } },
+    { skip: fetchProducts }
+  );
+  const { data: categories } = useGetCategoriesQuery({ skip: true });
+  const { data: brands } = useGetBrandsQuery({ skip: true });
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const { products, totalCount } = productsData || {};
 
   const filters = [
     {
@@ -81,25 +87,22 @@ export default function ProductList() {
         (_, i) => i !== index
       );
     }
-    console.log({ newFilter });
 
     setFilter({ ...newFilter });
   };
 
   const handleSort = (e, option) => {
-    const sort = { _sort: option.sort, _order: option.order };
-    console.log({ sort });
-    setSort(sort);
+    const updatedSort = { _sort: option.sort, _order: option.order };
+    setSort(updatedSort);
+  };
+
+  const handlePage = (page) => {
+    setPage(page);
   };
 
   useEffect(() => {
     setFetchProducts(false);
-    console.log(filter);
-  }, [filter, sort]);
-
-  useEffect(() => {
-    setRefetch(false);
-  }, []);
+  }, [filter, sort, page]);
 
   //   decide what to render
   let content = null;
@@ -218,7 +221,12 @@ export default function ProductList() {
                 {content}
               </div>
             </section>
-            <Pagination />
+            <Pagination
+              page={page}
+              setPage={setPage}
+              handlePage={handlePage}
+              totalItems={totalCount}
+            />
           </main>
         </div>
       </div>

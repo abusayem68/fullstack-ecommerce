@@ -4,17 +4,37 @@ import { apiSlice } from '../api/apiSlice';
 export const productApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProductsByFilters: builder.query({
-      query: ({ filter, sort }) => {
+      query: ({ filter, sort, pagination }) => {
         let queryString = '';
-        queryString += objectToQueryString(filter);
 
-        const sortQueryString = Object.entries(sort)
+        const filterQueryString = objectToQueryString(filter);
+        console.log(sort);
+        const sortQueryString =
+          sort._sort === ''
+            ? ''
+            : Object.entries(sort)
+                .map(([key, value]) => `${key}=${value}`)
+                .join('&');
+        console.log(sortQueryString);
+        const paginationQueryString = Object.entries(pagination)
           .map(([key, value]) => `${key}=${value}`)
           .join('&');
 
-        queryString += sortQueryString ? `&${sortQueryString}` : '';
+        queryString = [
+          filterQueryString,
+          sortQueryString,
+          paginationQueryString,
+        ]
+          .filter((item) => item.length > 0 && item !== '&')
+          .join('&');
 
         return '/products?' + queryString;
+      },
+      transformResponse(apiResponse, meta) {
+        return {
+          products: apiResponse,
+          totalCount: Number(meta.response.headers.get('X-Total-Count')),
+        };
       },
     }),
     getCategories: builder.query({
