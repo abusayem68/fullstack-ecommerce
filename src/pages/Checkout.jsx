@@ -1,5 +1,5 @@
-import CheckOutForm from '../components/CheckOutForm/CheckOutForm';
-import OrderSummary from '../components/OrderSummary/OrderSummary';
+import CheckOutForm from '../components/checkOut/CheckOutForm';
+import OrderSummary from '../components/checkOut/OrderSummary';
 
 const products = [
   {
@@ -29,7 +29,7 @@ const products = [
   // More products...
 ];
 
-export default function CheckoutPage() {
+export default function Checkout() {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 lg:py-12">
       <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">

@@ -1,5 +1,5 @@
-import Navbar from '../components/Navbar/Navbar';
-import ProductList from '../components/ProductList/ProductList';
+import Navbar from '../features/common/Navbar';
+import ProductList from '../features/product/components/ProductList';
 
 export default function Home() {
   return (

@@ -1,76 +1,10 @@
 import { Disclosure } from '@headlessui/react';
 import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  useGetBrandsQuery,
-  useGetCategoriesQuery,
-} from '../../features/filters/filtersApi';
-import { updateFilters } from '../../features/filters/filtersSlice';
 
-export default function FilterList() {
-  const { data: categories } = useGetCategoriesQuery();
-  const { data: brands } = useGetBrandsQuery();
-  const { categories: filterdCategories, brands: filteredBrands } = useSelector(
-    (state) => state.filter
-  );
-  const dispatch = useDispatch();
-
-  const filters = [
-    {
-      id: 'category',
-      name: 'category',
-      options: categories?.length > 0 ? categories : [],
-    },
-    {
-      id: 'brand',
-      name: 'brand',
-      options: brands?.length > 0 ? brands : [],
-    },
-  ];
-
-  const handleFilter = (name, value) => {
-    if (name === 'category') {
-      if (!filterdCategories?.includes(value)) {
-        dispatch(
-          updateFilters({
-            filterName: name,
-            filterValue: value,
-            changeType: 'added',
-          })
-        );
-      } else {
-        dispatch(
-          updateFilters({
-            filterName: name,
-            filterValue: value,
-            changeType: 'removed',
-          })
-        );
-      }
-    }
-    if (name === 'brand') {
-      if (!filteredBrands?.includes(value)) {
-        dispatch(
-          updateFilters({
-            filterName: name,
-            filterValue: value,
-            changeType: 'added',
-          })
-        );
-      } else {
-        dispatch(
-          updateFilters({
-            filterName: name,
-            filterValue: value,
-            changeType: 'removed',
-          })
-        );
-      }
-    }
-  };
-
+export default function DesktopFilter({ handleFilter, filters }) {
   return (
-    <>
+    <form className="hidden lg:block">
+      <h3 className="sr-only">Categories</h3>
       {filters.map((section) => (
         <Disclosure
           as="div"
@@ -108,16 +42,9 @@ export default function FilterList() {
                         id={`filter-${section.id}-${optionIdx}`}
                         name={`${section.id}[]`}
                         defaultValue={option.value}
-                        onChange={() =>
-                          handleFilter(section?.name, option?.value)
-                        }
+                        onChange={(e) => handleFilter(e, section, option)}
                         type="checkbox"
-                        defaultChecked={
-                          filteredBrands?.options?.includes(option.value) ||
-                          filterdCategories?.options?.includes(option.value)
-                            ? true
-                            : false
-                        }
+                        defaultChecked={option.checked}
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />
                       <label
@@ -133,6 +60,6 @@ export default function FilterList() {
           )}
         </Disclosure>
       ))}
-    </>
+    </form>
   );
 }

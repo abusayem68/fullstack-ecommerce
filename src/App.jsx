@@ -2,8 +2,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import CartPage from './pages/CartPage';
-import CheckoutPage from './pages/CheckoutPage';
+import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 
 function App() {
@@ -22,11 +22,11 @@ function App() {
     },
     {
       path: 'cart',
-      element: <CartPage />,
+      element: <Cart />,
     },
     {
       path: 'checkout',
-      element: <CheckoutPage />,
+      element: <Checkout />,
     },
     {
       path: 'product-details',
