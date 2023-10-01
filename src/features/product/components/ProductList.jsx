@@ -69,11 +69,9 @@ export default function ProductList() {
   ];
 
   const handleFilter = (e, section, option) => {
-    console.log(`checked: ${e.target.checked}`);
     let newFilter = { ...filter };
     if (e.target.checked) {
       if (newFilter[section.id]) {
-        console.log(newFilter[section.id]);
         newFilter[section.id] = [...newFilter[section.id], option.value];
       } else {
         newFilter[section.id] = [option.value];
@@ -82,7 +80,6 @@ export default function ProductList() {
       const index = newFilter[section.id].findIndex(
         (el) => el === option.value
       );
-      console.log(index);
       newFilter[section.id] = newFilter[section.id].filter(
         (_, i) => i !== index
       );
@@ -99,6 +96,10 @@ export default function ProductList() {
   const handlePage = (page) => {
     setPage(page);
   };
+
+  useEffect(() => {
+    setPage(1);
+  }, [totalCount, filter, sort]);
 
   useEffect(() => {
     setFetchProducts(false);
@@ -132,8 +133,8 @@ export default function ProductList() {
           />
 
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6 lg:pt-12">
+              <h1 className="text-lg md:text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">
                 All products
               </h1>
               <div className="flex items-center">
@@ -206,7 +207,7 @@ export default function ProductList() {
             </div>
             <section
               aria-labelledby="products-heading"
-              className="pb-24 pt-6">
+              className="pb-10 lg:pb-16 pt-6">
               <h2
                 id="products-heading"
                 className="sr-only">

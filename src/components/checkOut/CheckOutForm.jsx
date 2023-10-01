@@ -198,9 +198,9 @@ export default function CheckOutForm() {
           <ul
             role="list"
             className="divide-y divide-gray-100">
-            {people.map((person) => (
+            {people.map((person, idx) => (
               <li
-                key={person.email}
+                key={idx}
                 className="flex justify-between gap-x-6 py-5 px-4">
                 <div className="flex items-center min-w-0 gap-x-4">
                   <input

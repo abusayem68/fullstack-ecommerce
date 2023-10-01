@@ -1,12 +1,16 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import PrivateRoute from './features/auth/components/PrivateRoute';
+import PublicRoute from './features/auth/components/PublicRoute';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import Home from './pages/Home';
+import Login from './pages/Login';
 import ProductDetailsPage from './pages/ProductDetailsPage';
+import Signup from './pages/Signup';
+import useAuthCheck from './hooks/useAuthCheck';
 
 function App() {
+  const authChecked = useAuthCheck();
   const router = createBrowserRouter([
     {
       path: '/',
@@ -14,11 +18,19 @@ function App() {
     },
     {
       path: 'login',
-      element: <Login />,
+      element: (
+        <PublicRoute>
+          <Login />
+        </PublicRoute>
+      ),
     },
     {
       path: 'signup',
-      element: <Signup />,
+      element: (
+        <PublicRoute>
+          <Signup />
+        </PublicRoute>
+      ),
     },
     {
       path: 'cart',
@@ -26,14 +38,21 @@ function App() {
     },
     {
       path: 'checkout',
-      element: <Checkout />,
+      element: (
+        <PrivateRoute>
+          <Checkout />
+        </PrivateRoute>
+      ),
     },
     {
-      path: 'product-details',
+      path: 'products/:productId',
       element: <ProductDetailsPage />,
     },
   ]);
-  return (
+
+  return !authChecked ? (
+    <div>Checking Authentication...</div>
+  ) : (
     <>
       <RouterProvider router={router} />
     </>

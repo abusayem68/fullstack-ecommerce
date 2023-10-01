@@ -1,4 +1,46 @@
 {
+  "users": [
+    {
+      "email": "sayem387@gmail.com",
+      "password": "$2a$10$sOGDdSVt5YP8hVKT0ntQg.925hpR/VgFYcqx.zOCf8hBZhA0hAKH6",
+      "id": 2
+    },
+    {
+      "email": "akash.ahmed@learnwithsumit.com",
+      "password": "$2a$10$5aNHVbiAdEQqE1nBtMNgruQLKW9XiHR.NpRfZzAOk8wuWJyabUO3S",
+      "id": 3
+    },
+    {
+      "email": "admin@learnwithsumit.com",
+      "password": "$2a$10$eeaWtnJFbJuRhJoXWA2v.eM3hW4hHitqW.pEPmDSUR/BQqJhS8aV6",
+      "id": 4
+    },
+    {
+      "email": "test@yahoo.com",
+      "password": "$2a$10$RJSuzTt.FcUe/.NeiLNfi.Dvg3VaGYwDEx2a9Cx8LOr7M6PPnqopS",
+      "id": 5
+    },
+    {
+      "email": "test2@gmail.com",
+      "password": "$2a$10$/6qnwkIlhBoOhnMXPY7FiuwbDgWir4DX541xpVzgfF8paGKNyNZha",
+      "id": 6
+    },
+    {
+      "email": "abusayem29@gmail.com",
+      "password": "$2a$10$9ksZpzFP2NO7ISxwghM/deHGlYd.clOA/FiXqNz3wlgXAgYLuYFJq",
+      "id": 7
+    },
+    {
+      "email": "sumit@learnwithsumit.com",
+      "password": "$2a$10$rCL7UVpxApftwF6O6zaep.CsiDJwoOFjYQRE3ROODWA6mP.JGVkdS",
+      "id": 8
+    },
+    {
+      "email": "sumitt@learnwithsumit.com",
+      "password": "$2a$10$wTOXPQW4kJmMfikw5NXFK.BmuU7.bKAxqGaO/ji/9slyWnYgjqkzO",
+      "id": 9
+    }
+  ],
   "products": [
     {
       "id": 1,
@@ -48,7 +90,9 @@
       "brand": "Samsung",
       "category": "smartphones",
       "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-      "images": ["https://i.dummyjson.com/data/products/3/1.jpg"]
+      "images": [
+        "https://i.dummyjson.com/data/products/3/1.jpg"
+      ]
     },
     {
       "id": 4,
@@ -552,52 +596,128 @@
     }
   ],
   "categories": [
-    { "value": "smartphones", "label": "smartphones", "checked": false },
-    { "value": "laptops", "label": "laptops", "checked": false },
-    { "value": "fragrances", "label": "fragrances", "checked": false },
-    { "value": "skincare", "label": "skincare", "checked": false },
-    { "value": "groceries", "label": "groceries", "checked": false },
-    { "value": "home-decoration", "label": "home decoration", "checked": false }
+    {
+      "value": "smartphones",
+      "label": "smartphones",
+      "checked": false
+    },
+    {
+      "value": "laptops",
+      "label": "laptops",
+      "checked": false
+    },
+    {
+      "value": "fragrances",
+      "label": "fragrances",
+      "checked": false
+    },
+    {
+      "value": "skincare",
+      "label": "skincare",
+      "checked": false
+    },
+    {
+      "value": "groceries",
+      "label": "groceries",
+      "checked": false
+    },
+    {
+      "value": "home-decoration",
+      "label": "home decoration",
+      "checked": false
+    }
   ],
   "brands": [
-    { "value": "Apple", "label": "Apple", "checked": false },
-    { "value": "Samsung", "label": "Samsung", "checked": false },
-    { "value": "OPPO", "label": "OPPO", "checked": false },
-    { "value": "Huawei", "label": "Huawei", "checked": false },
+    {
+      "value": "Apple",
+      "label": "Apple",
+      "checked": false
+    },
+    {
+      "value": "Samsung",
+      "label": "Samsung",
+      "checked": false
+    },
+    {
+      "value": "OPPO",
+      "label": "OPPO",
+      "checked": false
+    },
+    {
+      "value": "Huawei",
+      "label": "Huawei",
+      "checked": false
+    },
     {
       "value": "Microsoft Surface",
       "label": "Microsoft Surface",
       "checked": false
     },
-    { "value": "Infinix", "label": "Infinix", "checked": false },
-    { "value": "HP Pavilion", "label": "HP Pavilion", "checked": false },
+    {
+      "value": "Infinix",
+      "label": "Infinix",
+      "checked": false
+    },
+    {
+      "value": "HP Pavilion",
+      "label": "HP Pavilion",
+      "checked": false
+    },
     {
       "value": "Impression of Acqua Di Gio",
       "label": "Impression-of-Acqua-Di-Gio",
       "checked": false
     },
-    { "value": "Royal_Mirage", "label": "Royal Mirage", "checked": false },
+    {
+      "value": "Royal_Mirage",
+      "label": "Royal Mirage",
+      "checked": false
+    },
     {
       "value": "Fog Scent Xpressio",
       "label": "Fog Scent Xpressio",
       "checked": false
     },
-    { "value": "Al Munakh", "label": "Al-Munakh", "checked": false },
+    {
+      "value": "Al Munakh",
+      "label": "Al-Munakh",
+      "checked": false
+    },
     {
       "value": "Lord - Al-Rehab",
       "label": "Lord - Al-Rehab",
       "checked": false
     },
-    { "value": "L'Oreal Paris", "label": "L'Oreal Paris", "checked": false },
-    { "value": "Hemani Tea", "label": "Hemani Tea", "checked": false },
-    { "value": "Dermive", "label": "Dermive", "checked": false },
+    {
+      "value": "L'Oreal Paris",
+      "label": "L'Oreal Paris",
+      "checked": false
+    },
+    {
+      "value": "Hemani Tea",
+      "label": "Hemani Tea",
+      "checked": false
+    },
+    {
+      "value": "Dermive",
+      "label": "Dermive",
+      "checked": false
+    },
     {
       "value": "ROREC White Rice",
       "label": "ROREC White Rice",
       "checked": false
     },
-    { "value": "Fair & Clear", "label": "Fair & Clear", "checked": false },
-    { "value": "Saaf & Khaas", "label": "Saaf & Khaas", "checked": false },
+    {
+      "value": "Fair & Clear",
+      "label": "Fair & Clear",
+      "checked": false
+    },
+    {
+      "value": "Saaf & Khaas",
+      "label": "Saaf & Khaas",
+      "checked": false
+    },
     {
       "value": "Bake Parlor Big",
       "label": "Bake Parlor Big",
@@ -608,12 +728,40 @@
       "label": "Baking Food Items",
       "checked": false
     },
-    { "value": "fauji", "label": "fauji", "checked": false },
-    { "value": "Dry Rose", "label": "Dry Rose", "checked": false },
-    { "value": "Boho Decor", "label": "Boho Decor", "checked": false },
-    { "value": "Flying Wooden", "label": "Flying Wooden", "checked": false },
-    { "value": "LED Lights", "label": "LED Lights", "checked": false },
-    { "value": "luxury palace", "label": "luxury palace", "checked": false },
-    { "value": "Golden", "label": "Golden", "checked": false }
+    {
+      "value": "fauji",
+      "label": "fauji",
+      "checked": false
+    },
+    {
+      "value": "Dry Rose",
+      "label": "Dry Rose",
+      "checked": false
+    },
+    {
+      "value": "Boho Decor",
+      "label": "Boho Decor",
+      "checked": false
+    },
+    {
+      "value": "Flying Wooden",
+      "label": "Flying Wooden",
+      "checked": false
+    },
+    {
+      "value": "LED Lights",
+      "label": "LED Lights",
+      "checked": false
+    },
+    {
+      "value": "luxury palace",
+      "label": "luxury palace",
+      "checked": false
+    },
+    {
+      "value": "Golden",
+      "label": "Golden",
+      "checked": false
+    }
   ]
 }

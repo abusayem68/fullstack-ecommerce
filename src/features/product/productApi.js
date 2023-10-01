@@ -8,14 +8,14 @@ export const productApi = apiSlice.injectEndpoints({
         let queryString = '';
 
         const filterQueryString = objectToQueryString(filter);
-        console.log(sort);
+
         const sortQueryString =
           sort._sort === ''
             ? ''
             : Object.entries(sort)
                 .map(([key, value]) => `${key}=${value}`)
                 .join('&');
-        console.log(sortQueryString);
+
         const paginationQueryString = Object.entries(pagination)
           .map(([key, value]) => `${key}=${value}`)
           .join('&');
@@ -37,6 +37,9 @@ export const productApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    getProductById: builder.query({
+      query: (id) => `/products/${id}`,
+    }),
     getCategories: builder.query({
       query: () => '/categories',
     }),
@@ -48,6 +51,7 @@ export const productApi = apiSlice.injectEndpoints({
 
 export const {
   useGetProductsByFiltersQuery,
+  useGetProductByIdQuery,
   useGetCategoriesQuery,
   useGetBrandsQuery,
 } = productApi;

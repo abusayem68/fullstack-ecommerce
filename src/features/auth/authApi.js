@@ -1,7 +1,63 @@
 import { apiSlice } from '../api/apiSlice';
+import { userLoggedIn } from './authSlice';
 
 export const authApi = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({}),
+  endpoints: (builder) => ({
+    register: builder.mutation({
+      query: (data) => ({
+        url: '/register',
+        method: 'POST',
+        body: data,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          localStorage.setItem(
+            'auth',
+            JSON.stringify({
+              accessToken: result.data.accessToken,
+              user: result.data.user,
+            })
+          );
+          dispatch(
+            userLoggedIn({
+              accessToken: result.data.accessToken,
+              user: result.data.user,
+            })
+          );
+        } catch (error) {
+          // do nothing
+        }
+      },
+    }),
+    login: builder.mutation({
+      query: (data) => ({
+        url: 'login',
+        method: 'post',
+        body: data,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          localStorage.setItem(
+            'auth',
+            JSON.stringify({
+              accessToken: result.data.accessToken,
+              user: result.data.user,
+            })
+          );
+          dispatch(
+            userLoggedIn({
+              accessToken: result.data.accessToken,
+              user: result.data.user,
+            })
+          );
+        } catch (error) {
+          // do nothing
+        }
+      },
+    }),
+  }),
 });
 
-export const {} = authApi;
+export const { useLoginMutation, useRegisterMutation } = authApi;

@@ -1,6 +1,29 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLoginMutation } from '../features/auth/authApi';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [login, { data, isLoading, error: responseError }] = useLoginMutation();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (responseError?.data) {
+      setError(responseError.data);
+    }
+  }, [data, responseError, navigate]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError('');
+    login({
+      email,
+      password,
+    });
+  };
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -17,9 +40,8 @@ export default function Login() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form
-            className="space-y-6"
-            action="#"
-            method="POST">
+            onSubmit={handleSubmit}
+            className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -28,6 +50,8 @@ export default function Login() {
               </label>
               <div className="mt-2">
                 <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   id="email"
                   name="email"
                   type="email"
@@ -45,16 +69,11 @@ export default function Login() {
                   className="block text-sm font-medium leading-6 text-gray-900">
                   Password
                 </label>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   id="password"
                   name="password"
                   type="password"
@@ -67,17 +86,19 @@ export default function Login() {
 
             <div>
               <button
+                disabled={isLoading}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Sign in
               </button>
             </div>
           </form>
-
+          {error !== '' && <p className="text-red-700 mt-3">{error}</p>}
           <p className="mt-10 text-center text-sm text-gray-500">
             Do not have an account?{' '}
             <Link
               to={'/signup'}
+              state={{ from: location?.state?.from }}
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               Sign Up
             </Link>
