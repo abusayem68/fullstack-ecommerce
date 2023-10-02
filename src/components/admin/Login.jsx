@@ -1,27 +1,37 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useLoginMutation } from '../features/auth/authApi';
+import { useLoginMutation } from '../../features/auth/authApi';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [login, { data, isLoading, error: responseError }] = useLoginMutation();
-  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (responseError?.data) {
       setError(responseError.data);
     }
-  }, [responseError]);
+    if (data?.accessToken && data?.user) {
+      if (data.user?.role === 'admin') {
+        navigate('/admin/dashboard');
+      }
+    }
+  }, [data, responseError]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
-    login({
-      email,
-      password,
-    });
+    if (email === 'admin@mail.com') {
+      login({
+        email,
+        password,
+        role: 'admin',
+      });
+    } else {
+      setError('Email does not match');
+    }
   };
   return (
     <>
@@ -93,15 +103,6 @@ export default function Login() {
             </div>
           </form>
           {error !== '' && <p className="text-red-700 mt-3">{error}</p>}
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Do not have an account?{' '}
-            <Link
-              to={'/signup'}
-              state={{ from: location?.state?.from }}
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Sign Up
-            </Link>
-          </p>
         </div>
       </div>
     </>

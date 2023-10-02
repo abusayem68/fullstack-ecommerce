@@ -26,6 +26,7 @@ export default function Signup() {
       register({
         email,
         password,
+        role: 'user',
       });
     }
   };

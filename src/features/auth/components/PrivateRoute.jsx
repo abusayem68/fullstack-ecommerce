@@ -3,8 +3,8 @@ import useAuth from '../../../hooks/useAuth';
 
 export default function PrivateRoute({ children }) {
   const location = useLocation();
-  const loggedIn = useAuth();
-  return loggedIn ? (
+  const auth = useAuth();
+  return auth && auth?.role === 'user' ? (
     children
   ) : (
     <Navigate
