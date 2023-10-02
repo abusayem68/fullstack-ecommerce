@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { userLoggedOut } from '../auth/authSlice';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:9000',
+  baseUrl: 'https://e-bazar-79nh.onrender.com',
   prepareHeaders: async (headers, { getState, endpoint }) => {
     const token = getState()?.auth?.accessToken;
     if (token) {
