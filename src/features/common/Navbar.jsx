@@ -7,7 +7,7 @@ import {
 import gravatar from 'gravatar';
 import { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import defaultAvararIcon from '../../assets/avatarIcon.jpg';
 import { userLoggedOut } from '../auth/authSlice';
 
@@ -54,18 +54,18 @@ export default function Navbar() {
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
-                          <Link
+                          <NavLink
                             key={item.name}
                             to={item.to}
-                            className={classNames(
-                              item.current
-                                ? 'bg-gray-900 text-white'
-                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                              'rounded-md px-3 py-2 text-sm font-medium'
-                            )}
-                            aria-current={item.current ? 'page' : undefined}>
+                            className={({ isActive, isPending }) =>
+                              isPending
+                                ? 'text-gray-300 hover:bg-gray-700 rounded-md px-3 py-2 text-sm font-medium'
+                                : isActive
+                                ? 'bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium'
+                                : 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                            }>
                             {item.name}
-                          </Link>
+                          </NavLink>
                         ))}
                       </div>
                     </div>

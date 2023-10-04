@@ -48,6 +48,7 @@ export default function CheckOutForm() {
                   type="text"
                   name="first-name"
                   id="first-name"
+                  required
                   autoComplete="given-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -65,6 +66,7 @@ export default function CheckOutForm() {
                   type="text"
                   name="last-name"
                   id="last-name"
+                  required
                   autoComplete="family-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -82,28 +84,27 @@ export default function CheckOutForm() {
                   id="email"
                   name="email"
                   type="email"
+                  required
                   autoComplete="email"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
-
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-4">
               <label
-                htmlFor="country"
+                htmlFor="phone"
                 className="block text-sm font-medium leading-6 text-gray-900">
-                Country
+                Phone
               </label>
               <div className="mt-2">
-                <select
-                  id="country"
-                  name="country"
-                  autoComplete="country-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                  <option>United States</option>
-                  <option>Canada</option>
-                  <option>Mexico</option>
-                </select>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="text"
+                  required
+                  autoComplete="phone"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
               </div>
             </div>
 
@@ -118,6 +119,7 @@ export default function CheckOutForm() {
                   type="text"
                   name="street-address"
                   id="street-address"
+                  required
                   autoComplete="street-address"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -176,7 +178,7 @@ export default function CheckOutForm() {
             </div>
           </div>
         </div>
-        <div className="mt-6 flex items-center justify-end gap-x-6">
+        {/* <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             type="button"
             className="text-sm font-semibold leading-6 text-gray-900">
@@ -268,7 +270,7 @@ export default function CheckOutForm() {
               </div>
             </fieldset>
           </div>
-        </div>
+        </div> */}
       </div>
     </form>
   );

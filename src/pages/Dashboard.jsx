@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
-import Navbar from '../components/admin/Navbar';
 
 export default function Dashboard() {
   return (
     <>
-      <Navbar />
       <div className="mx-auto max-w-7xl px-5 lg:px-0 ">
         <div className="px-3 md:lg:xl:px-40  py-20 bg-opacity-10">
           <div className="grid grid-cols-1 md:grid-cols-2  gap-6 p-8">

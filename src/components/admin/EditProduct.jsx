@@ -247,10 +247,5 @@ export default function EditProduct() {
       </form>
     );
   }
-  return (
-    <>
-      <Navbar />
-      {content}
-    </>
-  );
+  return <>{content}</>;
 }

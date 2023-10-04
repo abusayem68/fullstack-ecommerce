@@ -32,7 +32,6 @@ export default function ProductList() {
   }
   return (
     <>
-      <Navbar />
       <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
         <div className="lg:col-span-4">
           <div className="bg-white">

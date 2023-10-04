@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { removeFromCart } from '../features/cart/CartSlice';
+import {
+  decrementQuantity,
+  incrementQuantity,
+  removeFromCart,
+} from '../features/cart/CartSlice';
 
 export default function Cart() {
   const cart = useSelector((state) => state.cart);
@@ -14,6 +18,17 @@ export default function Cart() {
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id));
   };
+
+  const handleIncrement = (id) => {
+    dispatch(incrementQuantity(id));
+  };
+  const handleDecrement = (id, currentQuantity) => {
+    if (currentQuantity > 1) {
+      dispatch(decrementQuantity(id));
+    }
+  };
+
+  // decide what to render
   let content = null;
   if (products.length > 0) {
     content = products.map((product) => (
@@ -38,26 +53,59 @@ export default function Cart() {
                 $
                 {Math.round(
                   product.price * (1 - product.discountPercentage / 100)
-                )}
+                ) * product.quantity}
               </p>
             </div>
             <p className="mt-1 text-sm text-gray-500">{product.brand}</p>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">
-            <div className="text-gray-500">
+            <div className="flex items-center text-gray-500">
               <label
                 className="me-4"
                 htmlFor="quantity">
                 Qty
               </label>
-              <select
-                className="border rounded py-[6px] px-4"
-                name="quantity"
-                id="quantity">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
+              <div className="flex items-center gap-1">
+                <span
+                  onClick={() => handleDecrement(product.id, product.quantity)}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6 text-black cursor-pointer">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19.5 12h-15"
+                    />
+                  </svg>
+                </span>
+
+                <input
+                  value={product.quantity}
+                  className="border text-base rounded py-[6px] px-2 w-16"
+                  type="text"
+                  name="quantity"
+                  id="quantity"
+                />
+                <span onClick={() => handleIncrement(product.id)}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6 text-black cursor-pointer">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 4.5v15m7.5-7.5h-15"
+                    />
+                  </svg>
+                </span>
+              </div>
             </div>
             <div className="flex">
               <button

@@ -222,12 +222,14 @@ export default function ProductList() {
                 {content}
               </div>
             </section>
-            <Pagination
-              page={page}
-              setPage={setPage}
-              handlePage={handlePage}
-              totalItems={totalCount}
-            />
+            {!isLoading && (
+              <Pagination
+                page={page}
+                setPage={setPage}
+                handlePage={handlePage}
+                totalItems={totalCount}
+              />
+            )}
           </main>
         </div>
       </div>

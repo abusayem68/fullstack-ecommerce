@@ -108,7 +108,6 @@ export default function AddProduct() {
   }, [data, responseError, navigate]);
   return (
     <>
-      <Navbar />
       <form
         onSubmit={(e) => handleAddProduct(e)}
         className="bg-white px-10  py-6 shadow-xl rounded-md">

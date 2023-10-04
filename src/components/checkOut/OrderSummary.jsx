@@ -50,26 +50,18 @@ export default function OrderSummary() {
                           {Math.round(
                             product.price *
                               (1 - product.discountPercentage / 100)
-                          )}
+                          ) * product.quantity}
                         </p>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">
                         {product.brand}
                       </p>
                     </div>
-                    <div className="flex flex-1 items-end justify-between text-sm">
+                    <div className="flex flex-1 items-center justify-between text-sm">
                       <p className="text-gray-500">
-                        Qty{' '}
-                        <select
-                          className="ms-2 border rounded py-[6px] px-3"
-                          name="quantity"
-                          id="quantity">
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </select>
+                        Qty:{' '}
+                        <span className="text-black">{product.quantity}</span>
                       </p>
-
                       <div className="flex">
                         <button
                           onClick={() => handleRemoveFromCart(product.id)}
