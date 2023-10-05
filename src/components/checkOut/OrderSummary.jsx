@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeFromCart } from '../../features/cart/CartSlice';
 
-export default function OrderSummary() {
+export default function OrderSummary({ handleConfirmOrder }) {
   const cart = useSelector((state) => state.cart);
   const { products } = cart;
   const dispatch = useDispatch();
@@ -39,13 +39,31 @@ export default function OrderSummary() {
                     />
                   </div>
 
-                  <div className="ml-4 flex flex-1 flex-col">
+                  <div className="ml-3 flex flex-1 flex-col">
                     <div>
-                      <div className="flex justify-between text-base font-medium text-gray-900">
-                        <h3>
+                      <div className="flex justify-between gap-1 text-base font-medium text-gray-900 mb-1">
+                        <h3 className="w-3/5">
                           <a href={product.href}>{product.title}</a>
                         </h3>
                         <p className="ml-4">
+                          <span className="text-sm text-gray-500 me-2">
+                            Unit Price:{' '}
+                          </span>
+                          $
+                          {Math.round(
+                            product.price *
+                              (1 - product?.discountPercentage / 100)
+                          )}
+                        </p>
+                      </div>
+                      <div className="flex justify-between text-base font-medium text-gray-900">
+                        <p className="mt-1 text-sm text-gray-500">
+                          {product.brand}
+                        </p>
+                        <p className="ml-4">
+                          <span className="text-sm text-gray-500 me-2">
+                            Total:{' '}
+                          </span>
                           $
                           {Math.round(
                             product.price *
@@ -53,9 +71,6 @@ export default function OrderSummary() {
                           ) * product.quantity}
                         </p>
                       </div>
-                      <p className="mt-1 text-sm text-gray-500">
-                        {product.brand}
-                      </p>
                     </div>
                     <div className="flex flex-1 items-center justify-between text-sm">
                       <p className="text-gray-500">
@@ -89,11 +104,11 @@ export default function OrderSummary() {
           <p>${subTotal}</p>
         </div>
         <div className="mt-6">
-          <a
-            href="#"
-            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+          <button
+            onClick={handleConfirmOrder}
+            className="w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
             Confirm order
-          </a>
+          </button>
         </div>
         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
           <p>

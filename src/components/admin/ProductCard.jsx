@@ -1,14 +1,14 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDeleteProductMutation } from '../../features/product/productApi';
+import ConfirmDeleleModal from '../ui/ConfirmDeleleModal';
 
 export default function ProductCard({ product }) {
   const { id, thumbnail, title, price, rating, stock, discountPercentage } =
     product || {};
+  const [open, setOpen] = useState(false);
 
-  const [deleteProduct, { isLoading, isSuccess }] = useDeleteProductMutation();
-
-  const handleDeleteProduct = (id) => {
-    deleteProduct(id);
+  const handleDeleteProduct = () => {
+    setOpen(true);
   };
 
   return (
@@ -62,8 +62,7 @@ export default function ProductCard({ product }) {
             </button>
           </Link>
           <button
-            onClick={() => handleDeleteProduct(id)}
-            disabled={isLoading}
+            onClick={handleDeleteProduct}
             className="px-4 flex items-center justify-center rounded-md border border-transparent bg-red-600 py-2 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
             <span className="me-4">Delete</span>
             <svg
@@ -80,6 +79,11 @@ export default function ProductCard({ product }) {
               />
             </svg>
           </button>
+          <ConfirmDeleleModal
+            open={open}
+            setOpen={setOpen}
+            id={id}
+          />
         </div>
       </div>
     </>

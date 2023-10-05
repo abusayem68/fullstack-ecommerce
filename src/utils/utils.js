@@ -17,3 +17,24 @@ export const objectToQueryString = (obj) => {
   }
   return queryString;
 };
+
+export const validateEmail = (email) => {
+  // Regular expression for email validation
+  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+  if (emailRegex.test(email)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+export const validatePhoneNumber = (phoneNumber) => {
+  // Regular expression for phone number validation
+  const bdPhoneNumberRegex = /^(?:(?:\+|00)88|01)?\d{11}$/;
+
+  if (bdPhoneNumberRegex.test(phoneNumber)) {
+    return true;
+  } else {
+    return false;
+  }
+};

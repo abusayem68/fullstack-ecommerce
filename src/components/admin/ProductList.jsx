@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useGetAllProductsQuery } from '../../features/product/productApi';
-import Navbar from './Navbar';
+import SkeletonProduct from '../ui/SkeletonProduct';
 import ProductCard from './ProductCard';
 
 export default function ProductList() {
-  const [error, setError] = useState('');
   const {
     data: products,
     isLoading,
@@ -14,7 +13,18 @@ export default function ProductList() {
 
   let content = null;
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = (
+      <>
+        <SkeletonProduct />
+        <SkeletonProduct />
+        <SkeletonProduct />
+        <SkeletonProduct />
+        <SkeletonProduct />
+        <SkeletonProduct />
+        <SkeletonProduct />
+        <SkeletonProduct />
+      </>
+    );
   }
   if (!isLoading && isError) {
     content = <div>{responseError?.data}</div>;

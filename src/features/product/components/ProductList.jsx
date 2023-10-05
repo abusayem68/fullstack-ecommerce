@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { Fragment, useEffect, useState } from 'react';
 import { PRODUCTS_PER_PAGE } from '../../../app/constant';
+import SkeletonProduct from '../../../components/ui/SkeletonProduct';
 import Pagination from '../../common/Pagination';
 import {
   useGetBrandsQuery,
@@ -108,7 +109,22 @@ export default function ProductList() {
   //   decide what to render
   let content = null;
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = (
+      <div className="lg:col-span-3">
+        <div className="bg-white">
+          <div className="mx-auto max-w-2xl px-4 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
+            <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+              <SkeletonProduct />
+              <SkeletonProduct />
+              <SkeletonProduct />
+              <SkeletonProduct />
+              <SkeletonProduct />
+              <SkeletonProduct />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
   if (!isLoading && isError) {
     content = <div>Error! to load data</div>;

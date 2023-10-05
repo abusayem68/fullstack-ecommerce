@@ -1,18 +1,31 @@
 import { StarIcon } from '@heroicons/react/20/solid';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { addToCart } from '../../cart/CartSlice';
 
 export default function Product({ product }) {
   const { id, thumbnail, title, price, rating, discountPercentage } =
     product || {};
   const dispatch = useDispatch();
+  const notify = () =>
+    toast.success('Product Added', {
+      position: 'bottom-left',
+      autoClose: 200,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: 'dark',
+    });
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
+    notify();
   };
   return (
     <>
-      <div className="relative">
+      <div className="relative flex flex-col justify-between">
         <Link to={`/products/${id}`}>
           <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none hover:opacity-75 lg:h-80">
             <img
@@ -26,7 +39,16 @@ export default function Product({ product }) {
           <div>
             <h3 className="text-sm text-gray-700">{title}</h3>
             <div className="flex items-center gap-2">
-              <StarIcon className="w-5 h-5 text-yellow-500" />
+              {Array.from({ length: 5 }).map((el, index) => (
+                <StarIcon
+                  key={index}
+                  className={`${
+                    index + 1 <= rating ? 'text-yellow-500' : 'text-gray-200'
+                  } 'h-5 w-5 flex-shrink-0'
+                      `}
+                  aria-hidden="true"
+                />
+              ))}
               <p className="mt-1 text-sm text-gray-500">{rating}</p>
             </div>
           </div>

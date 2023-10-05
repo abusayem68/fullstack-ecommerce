@@ -82,14 +82,11 @@ export default function Cart() {
                     />
                   </svg>
                 </span>
-
-                <input
-                  value={product.quantity}
-                  className="border text-base rounded py-[6px] px-2 w-16"
-                  type="text"
-                  name="quantity"
-                  id="quantity"
-                />
+                <div
+                  className="border text-base rounded py-[6px] w-16 text-center"
+                  id="quantity">
+                  {product.quantity}
+                </div>
                 <span onClick={() => handleIncrement(product.id)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

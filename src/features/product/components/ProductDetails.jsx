@@ -3,6 +3,8 @@ import { StarIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Spinner from '../../../components/ui/Spinner';
 import { addToCart } from '../../cart/CartSlice';
 import { useGetProductByIdQuery } from '../productApi';
 
@@ -42,17 +44,28 @@ export default function ProductDetails() {
     category,
     brand,
   } = product || {};
-
+  const notify = () =>
+    toast.success('Product Added', {
+      position: 'bottom-left',
+      autoClose: 200,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: 'dark',
+    });
   const handleAddToCart = (e, product) => {
     e.preventDefault();
     dispatch(addToCart(product));
+    notify();
   };
 
   let breadcrumbs = null;
   // decide what to render
   let content = null;
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = <Spinner />;
   }
   if (!isLoading && isError) {
     content = <div>There was an error</div>;

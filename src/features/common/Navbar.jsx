@@ -94,21 +94,33 @@ export default function Navbar() {
                         as="div"
                         className="relative ml-3">
                         <div>
-                          <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                            <span className="absolute -inset-1.5" />
-                            <span className="sr-only">Open user menu</span>
-                            <img
-                              className="h-8 w-8 rounded-full"
-                              src={
-                                auth?.accessToken &&
-                                auth?.user &&
-                                auth?.user?.role === 'user'
-                                  ? gravatar.url(auth.user.email)
-                                  : defaultAvararIcon
-                              }
-                              alt=""
-                            />
-                          </Menu.Button>
+                          {auth?.accessToken &&
+                          auth?.user &&
+                          auth?.user?.role === 'user' ? (
+                            <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                              <span className="absolute -inset-1.5" />
+                              <span className="sr-only">Open user menu</span>
+                              <img
+                                className="h-8 w-8 rounded-full"
+                                src={gravatar.url(auth.user.email)}
+                                alt=""
+                              />
+                            </Menu.Button>
+                          ) : (
+                            <div className="flex gap-3 items-center">
+                              <Link
+                                to={'/login'}
+                                className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                                Log In
+                              </Link>
+                              <span className="text-gray-400">|</span>
+                              <Link
+                                to={'/signup'}
+                                className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                                Sign Up
+                              </Link>
+                            </div>
+                          )}
                         </div>
                         <Transition
                           as={Fragment}
